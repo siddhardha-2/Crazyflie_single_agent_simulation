@@ -1,0 +1,44 @@
+# -----------------------------------------------------------------------
+# ROS <-> Gazebo topic bridge configuration 
+#
+# Each drone needs 4 bridged topics:
+#   cmd_vel          : ROS -> Gazebo  (velocity commands from Guidence to gazebo)
+#   enable           : ROS -> Gazebo  (enable velocity controller — REQUIRED)
+#   odom             : Gazebo -> ROS  (drone position/velocity)
+#   imu              : Gazebo -> ROS
+
+# Plus 1 global topic:
+#   clock            : Gazebo -> ROS  (simulation time)
+#
+# This file covers 1 drone: cf0
+# -----------------------------------------------------------------------
+
+# --- Global ---
+- ros_topic_name: "/clock"
+  gz_topic_name: "/clock"
+  ros_type_name: "rosgraph_msgs/msg/Clock"
+  gz_type_name: "gz.msgs.Clock"
+  direction: GZ_TO_ROS
+
+# --- cf0 ---
+- ros_topic_name: "/cf0/cmd_vel"
+  gz_topic_name: "/cf0/gazebo/command/twist"
+  ros_type_name: "geometry_msgs/msg/Twist"
+  gz_type_name: "gz.msgs.Twist"
+  direction: ROS_TO_GZ
+- ros_topic_name: "/cf0/enable"
+  gz_topic_name: "/cf0/enable"
+  ros_type_name: "std_msgs/msg/Bool"
+  gz_type_name: "gz.msgs.Boolean"
+  direction: ROS_TO_GZ
+- ros_topic_name: "/cf0/odom"
+  gz_topic_name: "/model/cf0/odometry"
+  ros_type_name: "nav_msgs/msg/Odometry"
+  gz_type_name: "gz.msgs.Odometry"
+  direction: GZ_TO_ROS
+  # IMU
+- ros_topic_name: "/cf0/imu"
+  gz_topic_name: "/model/cf0/imu"
+  ros_type_name: "sensor_msgs/msg/Imu"
+  gz_type_name: "gz.msgs.IMU"
+  direction: GZ_TO_ROS

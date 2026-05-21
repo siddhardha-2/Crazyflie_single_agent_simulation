@@ -1,0 +1,28 @@
+pattern_node:
+  ros__parameters:
+
+    # -----------------------------------------------------------------------
+    # Square Pattern Waypoint Parameters
+    # -----------------------------------------------------------------------
+    square_size: 1.0              # Side length of square pattern in meters
+
+    # -----------------------------------------------------------------------
+    # Altitude Parameters
+    # -----------------------------------------------------------------------
+    altitude: 1.0                 # Flight altitude in meters
+
+    # -----------------------------------------------------------------------
+    # Tolerances — Distance to consider waypoint reached
+    # -----------------------------------------------------------------------
+    waypoint_tolerance: 0.15      # Distance threshold (m) to accept waypoint arrival
+    takeoff_tolerance: 0.1        # Distance threshold (m) to accept takeoff completion
+
+    # -----------------------------------------------------------------------
+    # Control Loop Rate
+    # -----------------------------------------------------------------------
+    guidance_rate: 20.0           # Guidance loop rate in Hz
+
+    # -----------------------------------------------------------------------
+    # Pattern Control
+    # -----------------------------------------------------------------------
+    loop_pattern: true            # Loop the pattern continuously (true/false)
