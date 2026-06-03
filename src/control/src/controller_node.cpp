@@ -178,7 +178,7 @@ void ControllerNode::controlLoop()
   double vx  = pid_x_->compute(des_x, cur_x, dt);
   double vy  = pid_y_->compute(des_y, cur_y, dt);
   double vz  = pid_z_->compute(des_z, cur_z, dt);
-  double wz  = pid_yaw_->compute(des_yaw, cur_yaw + yaw_error, dt);
+  double wz  = pid_yaw_->compute(yaw_error, 0.0, dt);
 
   // Publish cmd_vel
   geometry_msgs::msg::Twist cmd;

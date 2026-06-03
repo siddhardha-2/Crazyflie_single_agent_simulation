@@ -3,7 +3,7 @@
 <package format="3">
   <name>Guidance</name>
   <version>0.0.1</version>
-  <description>Guidance package for Crazyflie BMO simulation</description>
+  <description>Guidance package for Crazyflie simulation and hardware</description>
   <maintainer email="you@email.com">your name</maintainer>
   <license>MIT</license>
 

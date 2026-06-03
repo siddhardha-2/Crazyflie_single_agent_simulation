@@ -21,11 +21,13 @@ setup(
     zip_safe=True,
     maintainer='your name',
     maintainer_email='you@email.com',
-    description='Guidance package for Crazyflie BMO simulation',
+    description='Guidance package for Crazyflie simulation and hardware',
     license='MIT',
     entry_points={
         'console_scripts': [
             'pattern_node = Guidance.pattern_node:main',
+            'extremum_seeker  = Guidance.extremum_seeker:main',
+            'extremum_seeker_hardware = Guidance.extremum_seeker_hardware:main',
         ],
     },
 )

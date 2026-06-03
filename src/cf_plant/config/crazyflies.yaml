@@ -1,0 +1,57 @@
+# crazyflies.yaml
+# named list of all robots
+fileversion: 3
+
+robots:
+  cf0:
+    enabled: true
+    uri: radio://0/80/2M/E7E7E7E734
+    initial_position: [0.0, 0.0, 0.0]
+    type: cf21
+
+  cf2:
+    enabled: false
+    uri: radio://0/80/2M/E7E7E7E732
+    initial_position: [0.5, 0.0, 0.0]
+    type: cf21
+
+  cf3:
+    enabled: false
+    uri: radio://0/80/2M/E7E7E7E733
+    initial_position: [0.0, 0.5, 0.0]
+    type: cf21
+
+robot_types:
+  cf21:
+    motion_capture:
+      tracking: "none"
+    big_quad: false
+    battery:
+      voltage_warning: 3.8
+      voltage_critical: 3.7
+
+all:
+  firmware_logging:
+    enabled: true
+    default_topics:
+      pose:
+        frequency: 10
+      status:
+        frequency: 1
+
+  firmware_params:
+    commander:
+      enHighLevel: 1
+    stabilizer:
+      estimator: 2
+      controller: 1
+    kalman:
+      resetEstimation: 1
+    system:
+      link_timeout: 1000
+
+  reference_frame: "world"
+  
+  broadcasts:
+    num_repeats: 15
+    delay_between_repeats_ms: 1

@@ -1,34 +1,25 @@
 import os
-
 from ament_index_python.packages import get_package_share_directory
-
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
 from launch.actions import SetEnvironmentVariable
-
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-
 from launch_ros.substitutions import FindPackageShare
 from launch_ros.actions import Node
 
 
 def generate_launch_description():
 
-    # Your package
     pkg_crazy_sim = get_package_share_directory('crazy_sim')
 
     # World file
-    world_file = os.path.join(
-        pkg_crazy_sim,
-        'worlds',
-        'single_crazy_world.sdf'
-    )
+    world_file = os.path.join(pkg_crazy_sim, 'worlds', 'single_crazy_world.sdf')
 
     # Models folder
-    models_path = os.path.join(
-        pkg_crazy_sim,
-        'models'
-    )
+    models_path = os.path.join(pkg_crazy_sim, 'models')
+
+    # Include package root so worlds/materials textures can be resolved.
+    resource_path = models_path + ':' + pkg_crazy_sim
 
     # Gazebo launch
     gz_sim = IncludeLaunchDescription(
@@ -43,15 +34,13 @@ def generate_launch_description():
             'gz_args': world_file + ' -r'
         }.items(),
     )
-        # ROS <-> Gazebo bridge
+    # ROS <-> Gazebo bridge
     bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
         parameters=[{
             'config_file': os.path.join(
-                pkg_crazy_sim,
-                'config',
-                'ros_gz_bridge.yaml'
+                pkg_crazy_sim, 'config', 'ros_gz_bridge.yaml'
             ),
         }],
         output='screen',
@@ -59,13 +48,7 @@ def generate_launch_description():
 
     return LaunchDescription([
 
-        # Tell Gazebo where models are
-        SetEnvironmentVariable(
-            'GZ_SIM_RESOURCE_PATH',
-            models_path
-        ),
-
+        SetEnvironmentVariable('GZ_SIM_RESOURCE_PATH', resource_path),
         gz_sim,
-        # ROS-GZ bridge
         bridge,
     ])
