@@ -43,4 +43,3 @@ Thumbs.db
 # Recorded / generated experiment artifacts
 # -----------------------------------------------------------------------
 rosbag2_*/
-*_plots/
