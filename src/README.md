@@ -1,4 +1,5 @@
-# Crazyflie BMO — ROS2 Gazebo Simulation
+# Crazyflie  — ROS2 Gazebo Simulation and hardware
+
 
 A ROS2-based simulation framework for a swarm of Crazyflie drones using Gazebo. The system implements a full **Guidance → Control → Navigation** pipeline with a PID controller and modular guidance strategies.
 
