@@ -2,49 +2,30 @@ import os
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch_ros.actions import Node
+from launch.substitutions import LaunchConfiguration
 
 
 def generate_launch_description():
-    cf_plant_dir = get_package_share_directory('cf_plant')
-    navigation_dir = get_package_share_directory('navigation')
-    control_dir = get_package_share_directory('control')
-
-    connect_launch = IncludeLaunchDescription(
+    package_dir = get_package_share_directory('cf_plant')
+    generic_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(cf_plant_dir, 'launch', 'connect_731.launch.py')
-        )
-    )
-
-    navigation_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(navigation_dir, 'launch', 'navigation.launch.py')
+            os.path.join(package_dir, 'launch', 'hardware.launch.py')
         ),
-        launch_arguments={'use_sim_time': 'false'}.items()
-    )
-
-    control_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(control_dir, 'launch', 'control.launch.py')
-        ),
-        launch_arguments={'use_sim_time': 'false'}.items()
-    )
-
-    extremum_seeker = Node(
-        package='Guidance',
-        executable='extremum_seeker_hardware',
-        name='extremum_seeker_hardware',
-        output='screen',
-        parameters=[{
-            'use_sim_time': False,
-        }]
+        launch_arguments={
+            'robot_uri': LaunchConfiguration('robot_uri'),
+            'robot_name': LaunchConfiguration('robot_name'),
+        }.items(),
     )
 
     return LaunchDescription([
-        connect_launch,
-        navigation_launch,
-        control_launch,
-        extremum_seeker,
+        DeclareLaunchArgument(
+            'robot_uri',
+            description=(
+                'Crazyflie radio URI (required; no URI is stored in Git)'
+            ),
+        ),
+        DeclareLaunchArgument('robot_name', default_value='cf0'),
+        generic_launch,
     ])
