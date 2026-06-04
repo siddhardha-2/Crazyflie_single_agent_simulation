@@ -17,6 +17,8 @@
   <depend>geometry_msgs</depend>
   <depend>std_msgs</depend>
   <depend>navigation</depend>
+  <depend>crazyflie_interfaces</depend>
+  <exec_depend>python3-matplotlib</exec_depend>
 
   <export>
     <build_type>ament_python</build_type>
