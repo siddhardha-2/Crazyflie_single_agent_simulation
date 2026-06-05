@@ -43,3 +43,11 @@ Thumbs.db
 # Recorded / generated experiment artifacts
 # -----------------------------------------------------------------------
 rosbag2_*/
+experiment_logs/
+*.csv
+cache/
+
+# Crazyswarm2 runtime caches accidentally created below configuration folders
+src/cf_plant/config/build/
+src/cf_plant/config/install/
+src/cf_plant/config/log/

@@ -28,6 +28,8 @@ setup(
             'pattern_node = Guidance.pattern_node:main',
             'extremum_seeker  = Guidance.extremum_seeker:main',
             'extremum_seeker_hardware = Guidance.extremum_seeker_hardware:main',
+            'hardware_hover_test = Guidance.hardware_hover_test:main',
+            'hardware_circle_test = Guidance.hardware_circle_test:main',
         ],
     },
 )
