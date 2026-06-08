@@ -85,7 +85,7 @@ ros2 run Guidance hardware_circle_test --ros-args \
 ```
 
 The circle test writes a CSV log and trajectory plot under `experiment_logs/`.
-Experiment output and Crazyswarm2 runtime caches are ignored by Git.
+Experiment output and Crazyswarm2 runtime caches are ignored by the Git.
 
 ## Packages
 
