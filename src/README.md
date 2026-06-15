@@ -660,7 +660,7 @@ class CircleGuidance(Node):
 
 ## Planned Features
 
-- [ ] BMO (Bacterial Metaheuristic Optimization) guidance
+- [ ] BMO (ButterFly Mating Optimization) guidance
 - [ ] Extremum Seeking guidance (for adaptive control)
 - [ ] Formation control for multi-drone swarm
 - [ ] PID auto-tuning algorithm
