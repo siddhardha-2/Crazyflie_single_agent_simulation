@@ -5,7 +5,7 @@ fileversion: 3
 robots:
   cf0:
     enabled: false
-    uri: radio://0/80/2M/E7E7E7E700
+    uri: radio://0/80/2M/E7E7E7E731
     initial_position: [0.0, 0.0, 0.0]
     type: cf21
 
@@ -38,6 +38,8 @@ all:
         frequency: 10
       status:
         frequency: 1
+      imu:
+        frequency: 50
 
   firmware_params:
     commander:

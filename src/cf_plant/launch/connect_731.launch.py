@@ -16,6 +16,7 @@ def generate_launch_description():
         launch_arguments={
             'robot_uri': LaunchConfiguration('robot_uri'),
             'robot_name': LaunchConfiguration('robot_name'),
+            'backend': LaunchConfiguration('backend'),
         }.items(),
     )
 
@@ -27,5 +28,6 @@ def generate_launch_description():
             ),
         ),
         DeclareLaunchArgument('robot_name', default_value='cf0'),
+        DeclareLaunchArgument('backend', default_value='cpp'),
         generic_launch,
     ])

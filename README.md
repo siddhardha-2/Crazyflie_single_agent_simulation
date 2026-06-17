@@ -45,14 +45,14 @@ Connect Crazyswarm2 and the hardware bridge:
 
 ```bash
 ros2 launch cf_plant connect_hardware.launch.py \
-  robot_uri:=radio://0/80/2M/E7E7E7E731
+  robot_uri:=radio://0/80/2M/E7E7E7E730
 ```
 
 Run the full hardware Guidance → Control → Navigation stack:
 
 ```bash
 ros2 launch cf_plant hardware.launch.py \
-  robot_uri:=radio://0/80/2M/E7E7E7E731
+  robot_uri:=radio://0/80/2M/E7E7E7E730
 ```
 
 The older `connect_731.launch.py` and `hardware_731.launch.py` filenames remain

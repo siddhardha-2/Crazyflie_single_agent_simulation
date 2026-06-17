@@ -44,3 +44,35 @@ pattern_node:
 extremum_seeker:
   ros__parameters:
     altitude: 1.0
+
+extremum_seeker_tv_hardware:
+  ros__parameters:
+    # Flight altitude (metres)
+    altitude: 0.5
+
+    # Safety margin around the Lighthouse-detected centre (metres)
+    # The algorithm operates in a relative coordinate frame centred on the
+    # detected starting position. These radii set the absolute clip limits.
+    bound_radius_x:     1.0   # ± x from centre
+    bound_radius_y_neg: 0.5   # centre - this in y
+    bound_radius_y_pos: 1.6   # centre + this in y
+
+    # Lighthouse auto-calibration settings
+    calib_count:     10    # number of stable readings required
+    calib_tolerance: 0.3   # max position spread (m) to accept as stable
+extremum_seeker_tv_classical:
+   ros__parameters:
+     timer_period:  0.02      # control loop [s]  → 50 Hz
+     gain:          0.82      # velocity scaling
+     Gamma_w:       0.08      # estimator adaptation gain
+     alpha_w:       18.5      # weight projection radius
+     epsilon_w:     0.5
+     alpha_p:       5.5       # position projection radius (metres)
+     epsilon_p:     0.3
+     probe_amp:     0.35      # decaying probe amplitude
+     probe_decay:   0.35      # probe decay rate
+     probe_freq:    0.40      # probe frequency [rad/s]
+     cl_decay:      0.03      # concurrent-learning decay
+     hover_z:       0.5       # constant altitude setpoint [m]
+     w_star:        [-1.0, -0.5, 4.0, 2.0, -6.0]
+ 

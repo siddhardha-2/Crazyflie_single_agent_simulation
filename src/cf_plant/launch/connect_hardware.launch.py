@@ -13,6 +13,7 @@ def launch_setup(context):
     config_file = os.path.join(package_dir, 'config', 'crazyflies.yaml')
     robot_name = LaunchConfiguration('robot_name').perform(context)
     robot_uri = LaunchConfiguration('robot_uri').perform(context)
+    backend = LaunchConfiguration('backend').perform(context)
 
     with open(config_file, 'r', encoding='utf-8') as yaml_file:
         full_yaml = yaml.safe_load(yaml_file)
@@ -26,15 +27,26 @@ def launch_setup(context):
     robot_config['enabled'] = True
     robot_config['uri'] = robot_uri
     full_yaml['robots'] = {robot_name: robot_config}
-    full_yaml['backend'] = 'cpp'
+    full_yaml['backend'] = backend
+
+    server_package = 'crazyflie_server_py' if backend == 'cflib' else 'crazyflie'
+
+    server_yaml_file = os.path.join(
+        get_package_share_directory('crazyflie'),
+        'config',
+        'server.yaml')
+    with open(server_yaml_file, 'r', encoding='utf-8') as ymlfile:
+        server_yaml = yaml.safe_load(ymlfile)
+
+    server_params = [full_yaml, server_yaml['/crazyflie_server']['ros__parameters']]
 
     return [
         Node(
-            package='crazyflie',
+            package=server_package,
             executable='crazyflie_server',
             name='crazyflie_server',
             output='screen',
-            parameters=[full_yaml],
+            parameters=server_params,
         ),
         Node(
             package='cf_plant',
@@ -59,10 +71,11 @@ def generate_launch_description():
             'robot_uri',
             description=(
                 'Crazyflie radio URI, for example '
-                'radio://0/80/2M/E7E7E7E731'
+                'radio://0/80/2M/E7E7E7E735'
             ),
         ),
         DeclareLaunchArgument('robot_name', default_value='cf0'),
+        DeclareLaunchArgument('backend', default_value='cpp'),
         DeclareLaunchArgument('auto_arm', default_value='true'),
         DeclareLaunchArgument('auto_takeoff', default_value='true'),
         DeclareLaunchArgument('takeoff_duration', default_value='3.0'),
